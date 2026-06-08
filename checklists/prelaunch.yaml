@@ -1,0 +1,705 @@
+# NYC government public-facing web app pre-launch checklist
+# Mirror of docs/CHECKLIST.md — keep in sync when updating checklist
+# Parse with AGENTS.md guidance for automated compliance audits
+
+items:
+  # Section 1: Public Digital Experiences
+  - id: pde-classified
+    section: public_digital_experiences
+    required: true
+    text: Application classified as public-facing Digital Experience
+    sources: [SRC-001]
+    blocker: false
+  - id: pde-policy
+    section: public_digital_experiences
+    required: true
+    text: New/redesign follows Public Digital Experiences Policy
+    sources: [SRC-001]
+    blocker: false
+  - id: pde-web-first
+    section: public_digital_experiences
+    required: true
+    text: Web-first approach documented or native exception with weekly-use rationale
+    sources: [SRC-001]
+    blocker: false
+  - id: pde-ownership
+    section: public_digital_experiences
+    required: true
+    text: Agency content ownership and maintenance plan defined
+    sources: [SRC-001]
+    blocker: false
+
+  # Section 2: Design System
+  - id: ds-onboarding
+    section: design_system
+    required: true
+    text: OTI Digital Service onboarding initiated or completed
+    sources: [SRC-061]
+    blocker: false
+  - id: ds-core
+    section: design_system
+    required: true
+    text: "@nycds/core or approved design system integration"
+    sources: [SRC-061]
+    blocker: false
+  - id: ds-ui
+    section: design_system
+    required: true
+    text: UI follows brand, components, tokens, responsive patterns
+    sources: [SRC-001]
+    blocker: false
+  - id: ds-reviews
+    section: design_system
+    required: conditional
+    conditional_when: design phase occurred
+    text: At least two Digital Service design reviews completed
+    sources: [SRC-062]
+    blocker: false
+
+  # Section 3: Accessibility
+  - id: a11y-wcag22
+    section: accessibility
+    required: true
+    text: WCAG 2.2 Level AA conformance verified
+    sources: [SRC-011, SRC-014]
+    blocker: true
+  - id: a11y-wcag21-floor
+    section: accessibility
+    required: true
+    text: Federal WCAG 2.1 AA floor met
+    sources: [SRC-011]
+    blocker: false
+  - id: a11y-titles
+    section: accessibility
+    required: true
+    text: Unique descriptive page titles on all pages
+    sources: [SRC-014]
+    blocker: false
+  - id: a11y-contrast-links
+    section: accessibility
+    required: true
+    text: Contrast >= 4.5:1; links not color-only (bold + underlined in body)
+    sources: [SRC-014]
+    blocker: false
+  - id: a11y-keyboard-sr
+    section: accessibility
+    required: true
+    text: Keyboard and screen reader testing on critical paths
+    sources: [SRC-014]
+    blocker: false
+  - id: a11y-forms
+    section: accessibility
+    required: true
+    text: Accessible forms with unique per-field errors
+    sources: [SRC-056, SRC-014]
+    blocker: false
+  - id: a11y-tables-accordions
+    section: accessibility
+    required: true
+    text: Tables and accordions meet NYC.gov standards
+    sources: [SRC-014]
+    blocker: false
+  - id: a11y-media
+    section: accessibility
+    required: true
+    text: PDFs, video, maps meet WCAG 2.2 AA
+    sources: [SRC-015]
+    blocker: false
+  - id: a11y-statement
+    section: accessibility
+    required: true
+    text: Web accessibility statement posted
+    sources: [SRC-013]
+    blocker: false
+  - id: a11y-complaints
+    section: accessibility
+    required: true
+    text: Complaint/feedback mechanism for accessibility live
+    sources: [SRC-013]
+    blocker: false
+  - id: a11y-five-year
+    section: accessibility
+    required: true
+    text: Five-year accessibility plan process engaged with MOPD
+    sources: [SRC-013]
+    blocker: false
+
+  # Section 4: Performance
+  - id: perf-load-model
+    section: performance
+    required: true
+    text: Expected load documented from business analysis
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-stress
+    section: performance
+    required: true
+    text: Stress test >=3h steady state at >=120% expected max load
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-soak
+    section: performance
+    required: true
+    text: Soak/endurance test >=12h steady state at >= expected load
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-breakpoint
+    section: performance
+    required: false
+    text: Breakpoint test completed (recommended)
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-response-pages
+    section: performance
+    required: true
+    text: Avg page response <3s; p90 <5s
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-response-forms
+    section: performance
+    required: true
+    text: Form/service pages avg <30s; p90 <50s
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-response-upload
+    section: performance
+    required: true
+    text: ~2.92 MB upload avg <30s; p90 <50s
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-infra
+    section: performance
+    required: true
+    text: CPU <=65%, memory <=80%, no leaks, DB stable during tests
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-defects
+    section: performance
+    required: true
+    text: P1/P2 defects resolved
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-appendix-b
+    section: performance
+    required: true
+    text: All eight Appendix B activities documented
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-artifacts
+    section: performance
+    required: true
+    text: Pre-deployment artifact bundle (a-e) prepared
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-appendix-e
+    section: performance
+    required: true
+    text: Appendix E risk mapping reviewed
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-oti-submit
+    section: performance
+    required: true
+    text: Documentation submitted to OTI QA >=6 weeks before go-live
+    sources: [SRC-020]
+    blocker: false
+  - id: perf-oti-signoff
+    section: performance
+    required: true
+    text: OTI QA signoff obtained
+    sources: [SRC-020]
+    blocker: true
+  - id: perf-no-launch-date
+    section: performance
+    required: true
+    text: No public launch date committed before signoff
+    sources: [SRC-020]
+    blocker: false
+
+  # Section 5: Security
+  - id: sec-design
+    section: security
+    required: true
+    text: Security-by-design documented
+    sources: [SRC-030]
+    blocker: false
+  - id: sec-https
+    section: security
+    required: true
+    text: HTTPS enforced; secure cookie/session configuration
+    sources: [SRC-035, SRC-030]
+    blocker: true
+  - id: sec-auth-mfa
+    section: security
+    required: true
+    text: Individual authentication; MFA per city standards
+    sources: [SRC-030]
+    blocker: false
+  - id: sec-classification
+    section: security
+    required: true
+    text: Data classified Restricted/Sensitive/Non-Restricted
+    sources: [SRC-031]
+    blocker: false
+  - id: sec-encryption
+    section: security
+    required: true
+    text: Encryption at rest/transit for sensitive/restricted data
+    sources: [SRC-035, SRC-041]
+    blocker: false
+  - id: sec-coding
+    section: security
+    required: true
+    text: Secure coding practices (input validation, output encoding, sessions)
+    sources: [SRC-036]
+    blocker: false
+  - id: sec-env-separation
+    section: security
+    required: true
+    text: Dev/staging/prod separation; no dev in production
+    sources: [SRC-030]
+    blocker: false
+  - id: sec-change-control
+    section: security
+    required: true
+    text: Change control and separation of duties
+    sources: [SRC-030]
+    blocker: false
+  - id: sec-assessment
+    section: security
+    required: true
+    text: Security assessment for production release
+    sources: [SRC-030]
+    blocker: false
+  - id: sec-cciso
+    section: security
+    required: true
+    text: CCISO acknowledgment of security assessment
+    sources: [SRC-030]
+    blocker: true
+  - id: sec-rollback
+    section: security
+    required: true
+    text: Rollback plan for release
+    sources: [SRC-030]
+    blocker: false
+  - id: sec-ssa
+    section: security
+    required: conditional
+    conditional_when: SSA required by contract or Cyber Command
+    text: SSA/security scans completed
+    sources: [SRC-038]
+    blocker: false
+  - id: sec-accreditation
+    section: security
+    required: conditional
+    conditional_when: contractor-built
+    text: Security accreditation within 30 business days
+    sources: [SRC-038]
+    blocker: false
+  - id: sec-vuln
+    section: security
+    required: true
+    text: Vulnerability scan/remediation documented
+    sources: [SRC-038]
+    blocker: false
+  - id: sec-incident
+    section: security
+    required: true
+    text: Incident response contacts and logging in place
+    sources: [SRC-039]
+    blocker: false
+  - id: sec-vendor
+    section: security
+    required: conditional
+    conditional_when: contractor-built
+    text: Vendor security compliance
+    sources: [SRC-033]
+    blocker: false
+
+  # Section 6: Privacy
+  - id: priv-apo
+    section: privacy
+    required: true
+    text: Agency Privacy Officer consulted for identifying information
+    sources: [SRC-041]
+    blocker: false
+  - id: priv-design
+    section: privacy
+    required: true
+    text: Privacy-by-design applied
+    sources: [SRC-041]
+    blocker: false
+  - id: priv-minimization
+    section: privacy
+    required: true
+    text: Data minimization and purpose limitation documented
+    sources: [SRC-041]
+    blocker: false
+  - id: priv-pia
+    section: privacy
+    required: conditional
+    conditional_when: identifying information processed
+    text: PIA completed if required
+    sources: [SRC-042]
+    blocker: false
+  - id: priv-program-policy
+    section: privacy
+    required: conditional
+    conditional_when: program collects identifying information
+    text: Program privacy policy published
+    sources: [SRC-042]
+    blocker: false
+  - id: priv-nycgov-policy
+    section: privacy
+    required: true
+    text: NYC.gov Privacy Policy linked
+    sources: [SRC-043]
+    blocker: true
+  - id: priv-no-sale
+    section: privacy
+    required: true
+    text: No commercial sale/exchange of collected data
+    sources: [SRC-043]
+    blocker: false
+  - id: priv-rider
+    section: privacy
+    required: conditional
+    conditional_when: contractor handles identifying information
+    text: Identifying Information Rider in vendor contracts
+    sources: [SRC-045]
+    blocker: false
+
+  # Section 7: Domain, Content, Analytics
+  - id: domain-approved
+    section: domain_content_analytics
+    required: true
+    text: Approved nyc.gov or city domain assignment
+    sources: [SRC-002]
+    blocker: true
+  - id: domain-no-malware
+    section: domain_content_analytics
+    required: true
+    text: No malware, open redirects, or prohibited domain uses
+    sources: [SRC-002]
+    blocker: false
+  - id: content-accurate
+    section: domain_content_analytics
+    required: true
+    text: Content accurate, relevant, appropriate
+    sources: [SRC-050]
+    blocker: false
+  - id: content-plain-language
+    section: domain_content_analytics
+    required: true
+    text: NYC Web Content Style Guide and plain language followed
+    sources: [SRC-051, SRC-053]
+    blocker: false
+  - id: content-prohibited
+    section: domain_content_analytics
+    required: true
+    text: Prohibited content absent
+    sources: [SRC-050]
+    blocker: false
+  - id: analytics-tag-mgmt
+    section: domain_content_analytics
+    required: true
+    text: Analytics tags via OTI Citywide Tag Management System
+    sources: [SRC-044]
+    blocker: false
+  - id: analytics-deadline
+    section: domain_content_analytics
+    required: true
+    text: All tags through tag management by July 1, 2026
+    sources: [SRC-044]
+    blocker: false
+  - id: analytics-no-reid
+    section: domain_content_analytics
+    required: true
+    text: Analytics not used to re-identify individuals
+    sources: [SRC-044]
+    blocker: false
+  - id: analytics-removal
+    section: domain_content_analytics
+    required: true
+    text: Tag removal plan when analytics purpose complete
+    sources: [SRC-044]
+    blocker: false
+
+  # Section 8: Cloud
+  - id: cloud-notify
+    section: cloud
+    required: conditional
+    conditional_when: using SaaS, PaaS, IaaS, or vendor hosting
+    text: OTI notified via Service Catalog or cloud intake
+    sources: [SRC-070]
+    blocker: false
+  - id: cloud-approval
+    section: cloud
+    required: conditional
+    conditional_when: SaaS or PaaS procurement
+    text: OTI IT Security approval before procurement
+    sources: [SRC-070]
+    blocker: false
+  - id: cloud-accreditation
+    section: cloud
+    required: conditional
+    conditional_when: cloud-hosted
+    text: Cloud security accreditation completed
+    sources: [SRC-070]
+    blocker: false
+  - id: cloud-classification
+    section: cloud
+    required: conditional
+    conditional_when: cloud-hosted
+    text: Data classification controls applied in cloud
+    sources: [SRC-070]
+    blocker: false
+  - id: cloud-sla
+    section: cloud
+    required: conditional
+    conditional_when: cloud-hosted
+    text: SLA with infrastructure provider
+    sources: [SRC-030]
+    blocker: false
+  - id: cloud-perf
+    section: cloud
+    required: conditional
+    conditional_when: cloud-hosted public-facing
+    text: Performance testing completed (cloud does not exempt)
+    sources: [SRC-020]
+    blocker: false
+
+  # Section 9: AI
+  - id: ai-ll35
+    section: ai
+    required: conditional
+    conditional_when: ML/AI features or GenAI-created public content
+    text: LL35 applicability determined
+    sources: [SRC-081, SRC-082]
+    blocker: false
+  - id: ai-reporting
+    section: ai
+    required: conditional
+    conditional_when: LL35 applies
+    text: Algorithmic tool reporting plan documented
+    sources: [SRC-081]
+    blocker: false
+  - id: ai-approvals
+    section: ai
+    required: conditional
+    conditional_when: AI features present
+    text: Agency approvals obtained (APO, CISO, counsel, ACCO as needed)
+    sources: [SRC-080]
+    blocker: false
+  - id: ai-accounts
+    section: ai
+    required: conditional
+    conditional_when: AI used in development or product
+    text: City-managed AI accounts only; no personal accounts
+    sources: [SRC-080]
+    blocker: false
+  - id: ai-no-sensitive
+    section: ai
+    required: conditional
+    conditional_when: AI used
+    text: No Sensitive/Restricted data in unapproved AI tools
+    sources: [SRC-080]
+    blocker: false
+  - id: ai-human-review
+    section: ai
+    required: conditional
+    conditional_when: AI-generated public content
+    text: Human review for public-facing AI-generated content
+    sources: [SRC-080]
+    blocker: false
+  - id: ai-red-team
+    section: ai
+    required: conditional
+    conditional_when: public chatbot or AI assistant
+    text: Red-teaming or structured testing completed
+    sources: [SRC-085]
+    blocker: false
+  - id: ai-mfa-logging
+    section: ai
+    required: conditional
+    conditional_when: AI integrations in production
+    text: MFA and audit logging on AI integrations
+    sources: [SRC-080, SRC-083]
+    blocker: false
+  - id: ai-p08
+    section: ai
+    required: conditional
+    conditional_when: production AI features
+    text: P-08-PR-DS compliance confirmed with CISO
+    sources: [SRC-083]
+    blocker: false
+  - id: ai-action-plan
+    section: ai
+    required: conditional
+    conditional_when: public-facing AI features
+    text: AI Action Plan risk evaluation completed
+    sources: [SRC-084]
+    blocker: false
+
+  # Section 10: Open Data
+  - id: opendata-coordinator
+    section: open_data
+    required: conditional
+    conditional_when: publishes or maintains public datasets
+    text: Open Data Coordinator engaged
+    sources: [SRC-091]
+    blocker: false
+  - id: opendata-portal
+    section: open_data
+    required: conditional
+    conditional_when: publishes public datasets
+    text: Public datasets on NYC Open Data portal
+    sources: [SRC-090]
+    blocker: false
+  - id: opendata-dictionary
+    section: open_data
+    required: conditional
+    conditional_when: publishes public datasets
+    text: Data dictionary published
+    sources: [SRC-092]
+    blocker: false
+  - id: opendata-updates
+    section: open_data
+    required: conditional
+    conditional_when: publishes public datasets
+    text: Timely updates to portal
+    sources: [SRC-093]
+    blocker: false
+  - id: opendata-soda
+    section: open_data
+    required: conditional
+    conditional_when: publishes or consumes open data via API
+    text: SODA API or open formats per Technical Standards Manual
+    sources: [SRC-094]
+    blocker: false
+  - id: opendata-attribution
+    section: open_data
+    required: conditional
+    conditional_when: redistributing city datasets
+    text: Source attribution and version disclosure
+    sources: [SRC-090]
+    blocker: false
+
+  # Section 11: Forms, Linking, Content
+  - id: link-policy
+    section: forms_linking_content
+    required: true
+    text: Links follow Citywide Linking Policy
+    sources: [SRC-050, SRC-055]
+    blocker: false
+  - id: link-descriptive
+    section: forms_linking_content
+    required: true
+    text: Descriptive link text; same-tab default; no linked headings
+    sources: [SRC-055]
+    blocker: false
+  - id: terms-of-use
+    section: forms_linking_content
+    required: true
+    text: NYC.gov Terms of Use linked on account-based flows
+    sources: [SRC-058]
+    blocker: false
+  - id: forms-errors
+    section: forms_linking_content
+    required: true
+    text: Forms accessible with unique per-field error messages
+    sources: [SRC-056, SRC-014]
+    blocker: false
+  - id: forms-qa
+    section: forms_linking_content
+    required: true
+    text: Form QA completed (routing, responsive, errors)
+    sources: [SRC-056]
+    blocker: false
+  - id: content-dev-guidelines
+    section: forms_linking_content
+    required: true
+    text: Content conforms to Web Content Development Guidelines
+    sources: [SRC-057]
+    blocker: false
+
+  # Section 12: Language Access and IDEA
+  - id: lang-plain
+    section: language_access_idea
+    required: conditional
+    conditional_when: covered agency or IDEA-aligned redesign
+    text: Plain language review completed
+    sources: [SRC-051, SRC-053]
+    blocker: false
+  - id: lang-coordinator
+    section: language_access_idea
+    required: conditional
+    conditional_when: LL30 covered agency
+    text: Language Access Coordinator consulted
+    sources: [SRC-053]
+    blocker: false
+  - id: lang-translations
+    section: language_access_idea
+    required: conditional
+    conditional_when: multilingual UI
+    text: Translations human-reviewed
+    sources: [SRC-053]
+    blocker: false
+  - id: idea-search-nav
+    section: language_access_idea
+    required: true
+    text: Site search and navigation support task completion
+    sources: [SRC-001]
+    blocker: false
+  - id: idea-digital-forms
+    section: language_access_idea
+    required: true
+    text: Digital forms preferred over PDF applications
+    sources: [SRC-056]
+    blocker: false
+
+  # Section 13: Identity and MyCity
+  - id: id-nycid-required
+    section: identity_mycity
+    required: conditional
+    conditional_when: app has login or accounts
+    text: Confirmed whether NYC.ID SSO is required
+    sources: [SRC-059]
+    blocker: false
+  - id: id-sso-tested
+    section: identity_mycity
+    required: conditional
+    conditional_when: NYC.ID integration required
+    text: SSO integration tested; no parallel identity silo
+    sources: [SRC-059]
+    blocker: false
+  - id: id-terms
+    section: identity_mycity
+    required: conditional
+    conditional_when: account creation
+    text: Terms, Privacy Policy, NYC.ID Terms at account creation
+    sources: [SRC-058, SRC-043]
+    blocker: false
+  - id: id-data-sharing
+    section: identity_mycity
+    required: conditional
+    conditional_when: cross-agency data flows
+    text: Data sharing agreement in place
+    sources: [SRC-063]
+    blocker: false
+  - id: id-mfa
+    section: identity_mycity
+    required: conditional
+    conditional_when: authenticated app
+    text: MFA for sensitive account operations
+    sources: [SRC-030]
+    blocker: false
+
+launch_blockers:
+  - perf-oti-signoff
+  - sec-cciso
+  - a11y-wcag22
+  - priv-nycgov-policy
+  - domain-approved
+  - sec-https
