@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "src",
+      "path": "../src"
+    }
+  ],
+  "settings": {
+    "auto-tfs.tf.path": "../scripts/tfvc-wrapper.sh",
+    "auto-tfs.tf.language": "English",
+    "auto-tfs.tfs.autoCheckout": "On Save",
+    "auto-tfs.tfs.autoAdd": true,
+    "auto-tfs.tfs.autoDelete": true,
+    "auto-tfs.tfs.autoRename": true,
+    "auto-tfs.tfs.autoSync": true,
+    "auto-tfs.tfs.quickDiff": true,
+    "auto-tfs.tfs.checkin": "Disabled",
+    "auto-tfs.tfs.confirm": false,
+    "auto-tfs.tfs.debug": true
+  }
+}
