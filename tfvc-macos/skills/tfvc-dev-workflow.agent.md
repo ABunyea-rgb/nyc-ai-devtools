@@ -58,11 +58,39 @@ Use this order for most requests:
 ./scripts/tfvc-wrapper.sh shelve -recursive -comment:"<comment>" <shelveset-name> .
 ```
 
+## Applying changes copied from another repo (mirror -> TFVC)
+
+TFVC workspace files are commonly read-only until they are pended for edit.
+When applying code that was prepared outside the TFVC workspace, always use this order:
+
+1. Identify the exact file list to publish.
+2. Pend edits first (makes files writable):
+
+```zsh
+./scripts/tfvc-wrapper.sh checkout <file1> <file2> ...
+```
+
+3. Copy file contents into the TFVC workspace.
+4. Verify scope:
+
+```zsh
+./scripts/tfvc-wrapper.sh status <scope-path> -recursive
+```
+
+5. Check in only the intended files:
+
+```zsh
+./scripts/tfvc-wrapper.sh checkin -comment:"<comment>" <file1> <file2> ...
+```
+
+If copy fails with `Permission denied`, stop and run `checkout` on those files before retrying the copy.
+
 ## Guardrails
 
 - Do not run bulk undo (`undo . -recursive`) unless user explicitly asks.
 - Do not check in without a non-empty, meaningful comment.
 - Show current pending changes before check-in or undo.
+- For copy/publish flows from a non-TFVC repo, do not copy into TFVC paths until `checkout` has pended edits for the exact target files.
 - If command intent is ambiguous (check-in vs shelve), ask once and proceed.
 - Never delete or remap workspace mappings unless explicitly requested.
 

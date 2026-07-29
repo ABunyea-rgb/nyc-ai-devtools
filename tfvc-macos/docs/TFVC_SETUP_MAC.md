@@ -137,6 +137,29 @@ Shelve instead:
 ./scripts/tfvc-wrapper.sh shelve -recursive -comment:"<comment>" <shelveset-name> .
 ```
 
+## Copying Changes Into TFVC Workspace
+
+When copying files from another repo (for example, a Git mirror) into a TFVC workspace,
+target files are often read-only until they are pended for edit.
+
+Use this sequence:
+
+```zsh
+# 1) Pend edits on exact files first (makes files writable)
+./scripts/tfvc-wrapper.sh checkout <file1> <file2> ...
+
+# 2) Copy files from source repo into TFVC mapped workspace
+# cp/rsync command here
+
+# 3) Verify only intended changes are pending
+./scripts/tfvc-wrapper.sh status <scope-path> -recursive
+
+# 4) Check in only intended files
+./scripts/tfvc-wrapper.sh checkin -comment:"<comment>" <file1> <file2> ...
+```
+
+If copy fails with `Permission denied`, run `checkout` on those files and retry.
+
 ## Troubleshooting
 
 - Wrapper says tf not found: set `TFVC_TEE_ROOT` to your TEE install directory.
