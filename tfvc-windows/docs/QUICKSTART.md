@@ -16,34 +16,52 @@ Open **Team Explorer > Home > Pending Changes** (Ctrl+0, P). Review **Included C
 
 ## Publish from pitcrew-dcwp
 
-Use this workflow to copy completed changes from the Git mirror into the mapped TFVC workspace. Run these commands from **Git Bash**. Stop the local stack first so temporary overlays are reverted.
+Use this workflow to copy merged changes from the Git mirror into the mapped TFVC workspace. Run these commands from **Git Bash**. Stop the local stack first so temporary overlays are reverted.
 
-Note: these commands should only be run against the `main` branch.
+Publishing sends only the files changed in git between the `synced-to-tfvc` tag (the last commit checked in to TFVC) and `origin/main`, using their committed content. Build output, caches, and uncommitted edits are never copied, and you don't need to have `main` checked out.
 
-From the mirror repository, preview the copy:
+1. Get latest in TFVC (Team Explorer, or `bash "$TFVC_TOOLS/tfvc.sh" get . /recursive`) and confirm there are no pending changes.
 
-```bash
-cd /c/Users/[path to repo base]/pitcrew-dcwp
-npm run publish:dry-run
-```
+2. From the mirror repository, preview the publish:
 
-Review the report path and the added, updated, and deleted file list. Continue only if the target paths and entire delta are expected. If the preview is unexpectedly large or reports overlay/conflict warnings, stop and investigate; do not use `--force` just to bypass a warning.
+   ```bash
+   cd /c/Users/[path to repo base]/pitcrew-dcwp
+   npm run publish:dry-run
+   ```
 
-When the preview is correct, run the commands below. `publish:apply` copies the changes into the mapped TFVC workspace. `publish:checkin-note` prints a check-in comment template; it does not copy files or check them in:
+   The preview lists the merged PRs and each file as `add`, `edit`, `delete`, `already` (TFVC already matches), or `drift`. Drift means the TFVC file changed after the last sync, so overwriting it would lose that change. Compare it with the git versions, then rerun with `-- --skip-drift` and merge it by hand. Use `-- --force` only if you're sure the TFVC change should be replaced.
 
-```bash
-npm run publish:apply
-npm run publish:checkin-note
-```
+   To publish a different range, pass `-- --base <commit> --head <commit>`.
 
-Then inspect TFVC pending changes and check in from Visual Studio:
+3. Apply and print the comment template:
 
-```bash
-export TFVC_TOOLS=/c/Users/[path to repo]/nyc-ai-devtools/tfvc-windows/scripts
-cd /c/Users/[path to tfvc workspace]/DEV-OTI
-bash "$TFVC_TOOLS/tfvc.sh" status . /recursive
-```
+   ```bash
+   npm run publish:apply
+   npm run publish:checkin-note
+   ```
 
-Refresh **Team Explorer > Home > Pending Changes**, promote any intended detected files, and verify that only the expected changes are included. Enter the check-in comment and select **Check In**. `publish:apply` copies files locally; it does not create the server changeset.
+   `publish:apply` copies files into the TFVC workspace and prints `tf add` / `tf delete` commands for new and removed files. It doesn't create a changeset. To undo it, run `npm run publish:rollback`.
+
+4. Pend new and deleted files, then review:
+
+   ```bash
+   export TFVC_TOOLS=/c/Users/[path to repo]/nyc-ai-devtools/tfvc-windows/scripts
+   cd /c/Users/[path to tfvc workspace]/DEV-OTI
+   bash "$TFVC_TOOLS/tfvc.sh" add "<path from publish:apply>"
+   bash "$TFVC_TOOLS/tfvc.sh" status . /recursive
+   ```
+
+   The pending changes should match the files from step 2 that weren't `already`. In **Team Explorer > Pending Changes**, don't promote other detected files.
+
+5. Enter the comment (one sentence per change, PR numbers in parentheses, for example `Add Click-to-Cancel submit timeout handling and timeout error page (PR #132).`) and select **Check In**.
+
+6. Record the check-in so the next publish starts from it:
+
+   ```bash
+   cd /c/Users/[path to repo base]/pitcrew-dcwp
+   npm run publish:mark-synced -- <changeset number>
+   ```
+
+   This moves the `synced-to-tfvc` tag to the commit you published and pushes it, so everyone's next publish uses the same starting point.
 
 For command-line use, see [TFVC_SETUP_WINDOWS.md](TFVC_SETUP_WINDOWS.md). For more detail, see Microsoft's [Visual Studio TFVC setup guide](https://learn.microsoft.com/en-us/azure/devops/repos/tfvc/set-up-team-foundation-version-control-your-dev-machine?view=azure-devops).
